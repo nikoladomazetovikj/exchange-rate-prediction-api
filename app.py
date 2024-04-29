@@ -36,12 +36,12 @@ def fetch_data_from_database ():
     return data
 
 
-def preprocess_data(data):
-    rates = [round(float(row[1]), 2) for row in data]
+def preprocess_data ( data ):
+    rates = [ round ( float ( row [ 1 ] ), 2 ) for row in data ]
 
-    preprocessed_data = np.zeros((len(rates) - 6, 7))
-    for i in range(6, len(rates)):
-        preprocessed_data[i - 6] = rates[i - 6:i + 1][::-1]
+    preprocessed_data = np.zeros ( (len ( rates ) - 6, 7) )
+    for i in range ( 6, len ( rates ) ):
+        preprocessed_data [ i - 6 ] = rates [ i - 6:i + 1 ] [ ::-1 ]
 
     return preprocessed_data
 
@@ -58,18 +58,16 @@ def hello_world ():
     } )
 
 
-@app.route('/predict', methods=['GET'])
-def predict():
-    data = fetch_data_from_database()
-    preprocessed_data = preprocess_data(data)
-    predictions = model.predict(preprocessed_data)
+@app.route ( '/predict', methods=[ 'GET' ] )
+def predict ():
+    data = fetch_data_from_database ( )
+    preprocessed_data = preprocess_data ( data )
+    predictions = model.predict ( preprocessed_data )
 
     # Round each prediction to two decimal places
-    rounded_predictions = np.round(predictions, 2)
+    rounded_predictions = np.round ( predictions, 2 )
 
-    return jsonify({'predictions': rounded_predictions.tolist()}), 200
-
-
+    return jsonify ( { 'predictions': rounded_predictions.tolist ( ) } ), 200
 
 
 if __name__ == '__main__':
