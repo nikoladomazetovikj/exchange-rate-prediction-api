@@ -6,10 +6,11 @@ import joblib
 
 app = Flask ( __name__ )
 
-host = 'localhost'
-user = 'sail'
-password = 'password'
-database = 'laravel'
+# Add DB Configurations
+host = ''
+user = ''
+password = ''
+database = ''
 
 model = joblib.load ( 'model.pkl' )
 
