@@ -3,14 +3,14 @@ from datetime import datetime, timedelta
 import pymysql
 import numpy as np
 import joblib
+import os
 
 app = Flask ( __name__ )
 
-# Add DB Configurations
-host = ''
-user = ''
-password = ''
-database = ''
+host = os.getenv('DATABASE_HOST')
+user = os.getenv('DATABASE_USER')
+password = os.getenv('DATABASE_PASSWORD')
+database = os.getenv('DATABASE_NAME')
 
 model = joblib.load ( 'model.pkl' )
 
