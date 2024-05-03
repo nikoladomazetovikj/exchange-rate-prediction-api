@@ -15,24 +15,26 @@ database = os.getenv('DATABASE_NAME')
 model = joblib.load ( 'model.pkl' )
 
 
-def fetch_data_from_database ():
-    connection = pymysql.connect ( host=host,
-                                   user=user,
-                                   password=password,
-                                   database=database )
-    cursor = connection.cursor ( )
+def fetch_data_from_database():
+    connection = pymysql.connect(host=host,
+                                 user=user,
+                                 password=password,
+                                 database=database)
+    cursor = connection.cursor()
 
-    end_date = datetime.now ( )
-    start_date = end_date - timedelta ( days=7 )
+    today = datetime.now ( )
+    start_date = today - timedelta ( days=today.weekday ( ) + 7 )
+    end_date = start_date + timedelta ( days=6 )
+
     start_date_str = start_date.strftime ( '%Y-%m-%d' )
     end_date_str = end_date.strftime ( '%Y-%m-%d' )
 
     query = f"SELECT date, rate FROM rates WHERE date BETWEEN '{start_date_str}' AND '{end_date_str}'"
-    cursor.execute ( query )
-    data = cursor.fetchall ( )
+    cursor.execute(query)
+    data = cursor.fetchall()
 
-    cursor.close ( )
-    connection.close ( )
+    cursor.close()
+    connection.close()
 
     return data
 
