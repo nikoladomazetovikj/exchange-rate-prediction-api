@@ -45,5 +45,7 @@ pip install -r requirements.txt
 6. Run the server:
 
 ```bash
+.venv\Scripts\activate
+
 flask run --port=your_port
 ```
