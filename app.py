@@ -43,7 +43,7 @@ def store_predictions(predictions, start_date):
     for i in range(7):
         prediction_date = (start_date + timedelta(days=i)).strftime('%Y-%m-%d')
         rate = float(predictions[0][i])  # Ensure each prediction is a float
-        cursor.execute("INSERT INTO predictions (date, rate) VALUES (%s, %s)", (prediction_date, rate))
+        cursor.execute("INSERT INTO predictions (date, rate, created_at, updated_at) VALUES (%s, %s,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)", (prediction_date, rate))
     connection.commit()
     cursor.close()
     connection.close()
