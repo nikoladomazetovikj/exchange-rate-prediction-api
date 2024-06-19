@@ -6,7 +6,6 @@ This project serves as the primary API for exchange rate prediction, harnessing 
 
 >>Python 3.10 or above
 
->>MySQL 8 or above 
 
 ## Setup
 
